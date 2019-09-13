@@ -1,0 +1,151 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "2.2.2.2",
+	"parameters": {
+		"tags_env": {
+			"type": "string",
+			"defaultValue": "dev"
+		},
+		"sites_assetdeliveryapp_name": {
+			"type": "string",
+			"defaultValue": "wkhmrassetdeliveryservice"
+		},
+		"sites_multifieldsearch_name": {
+			"type": "string",
+			"defaultValue": "wkhmrmultifieldsearchservice"
+		},
+		"sites_mapping_name": {
+			"type": "string",
+			"defaultValue": "wkhmrmappingservice"
+		},
+		"sites_oviduiapp_name": {
+			"type": "string",
+			"defaultValue": "wkhmrovidui"
+		},
+		"sites_ovidservicesapp_name": {
+			"type": "string",
+			"defaultValue": "wkhmrovidservices"
+		},
+		"sites_entitlements_name": {
+			"type": "string",
+			"defaultValue": "wkhmrentitlementscollectorservice"
+		}
+	},
+	"variables": {
+		
+	},
+	"resources": [{
+		"comments": "/microsoft.insights/components/assetdelivery'.",		
+		"type": "microsoft.insights/components",
+		"kind": "api",
+		"name": "[parameters('sites_assetdeliveryapp_name')]",		
+		"apiVersion": "2014-04-01",
+		"location": "[resourceGroup().location]",
+		"tags": {
+			"env": "[parameters('tags_env')]"
+		},
+		"properties": {
+			"ApplicationId": "[parameters('sites_assetdeliveryapp_name')]"			
+		},
+		"dependsOn": []
+	},	
+	{
+		"type": "microsoft.insights/components",
+		"kind": "api",
+		"name": "[parameters('sites_multifieldsearch_name')]",
+		"apiVersion": "2014-04-01",
+		"location": "[resourceGroup().location]",
+		"tags": {
+			"env": "[parameters('tags_env')]"
+		},
+		"properties": {
+			"ApplicationId": "[parameters('sites_multifieldsearch_name')]"
+		},
+		"dependsOn": []
+	},
+	{
+		"type": "microsoft.insights/components",
+		"kind": "api",
+		"name": "[parameters('sites_mapping_name')]",
+		"apiVersion": "2014-04-01",
+		"location": "[resourceGroup().location]",
+		"tags": {
+			"env": "[parameters('tags_env')]"
+		},
+		"properties": {
+			"ApplicationId": "[parameters('sites_mapping_name')]"
+		},
+		"dependsOn": []
+	},
+	{
+		"comments": "/microsoft.insights/components/ovidui'.",
+		"type": "microsoft.insights/components",
+		"kind": "web",
+		"name": "[parameters('sites_oviduiapp_name')]",
+		"apiVersion": "2014-04-01",
+		"location": "[resourceGroup().location]",
+		"tags": {
+			"env": "[parameters('tags_env')]"
+		},
+		"properties": {
+			"ApplicationId": "[parameters('sites_oviduiapp_name')]"
+		},
+		"dependsOn": []
+	},
+	{
+		"comments": "/microsoft.insights/components/ovidui'.",
+		"type": "microsoft.insights/components",
+		"kind": "api",
+		"name": "[parameters('sites_ovidservicesapp_name')]",
+		"apiVersion": "2014-04-01",
+		"location": "[resourceGroup().location]",
+		"tags": {
+			"env": "[parameters('tags_env')]"
+		},
+		"properties": {
+			"ApplicationId": "[parameters('sites_ovidservicesapp_name')]"
+		},
+		"dependsOn": []
+	},
+	{
+		"type": "microsoft.insights/components",
+		"kind": "api",
+		"name": "[parameters('sites_entitlements_name')]",
+		"apiVersion": "2014-04-01",
+		"location": "[resourceGroup().location]",
+		"tags": {
+			"env": "[parameters('tags_env')]"
+		},
+		"properties": {
+			"ApplicationId": "[parameters('sites_entitlements_name')]"
+		},
+		"dependsOn": []
+	}
+	],
+	"outputs": {
+		"assetdeliveryAppInstrumentationKey": {
+			"value": "[reference(resourceId('Microsoft.Insights/components', parameters('sites_assetdeliveryapp_name')), '2014-04-01').InstrumentationKey]",
+			"type": "string"
+		},
+		"multifieldsearchAppInstrumentationKey": {
+			"value": "[reference(resourceId('Microsoft.Insights/components', parameters('sites_multifieldsearch_name')), '2014-04-01').InstrumentationKey]",
+			"type": "string"
+		},
+		"mappingAppInstrumentationKey": {
+			"value": "[reference(resourceId('Microsoft.Insights/components', parameters('sites_mapping_name')), '2014-04-01').InstrumentationKey]",
+			"type": "string"
+		},
+		"oviduiAppInstrumentationKey": {
+			"value": "[reference(resourceId('Microsoft.Insights/components', parameters('sites_oviduiapp_name')), '2014-04-01').InstrumentationKey]",
+			"type": "string"
+		},
+		"ovidserviceAppInstrumentationKey": {
+			"value": "[reference(resourceId('Microsoft.Insights/components', parameters('sites_ovidservicesapp_name')), '2014-04-01').InstrumentationKey]",
+			"type": "string"
+		},
+		"entitlementsAppInstrumentationKey": {
+			"value": "[reference(resourceId('Microsoft.Insights/components', parameters('sites_entitlements_name')), '2014-04-01').InstrumentationKey]",
+			"type": "string"
+		}
+	}
+}
