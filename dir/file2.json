@@ -1,6 +1,6 @@
 {
 	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
-	"contentVersion": "41.4.42.20",
+	"contentVersion": "41.41.42.20",
 	"parameters": {
 		"tags_env": {
 			"type": "string",
